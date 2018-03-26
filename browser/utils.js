@@ -1,4 +1,4 @@
-export const fakeChirps = [
+const fakeChirps = [
   {
     id: 1,
     text: 'i just saw a duck-billed goose-heron-swallow',
@@ -26,10 +26,15 @@ export const fakeChirps = [
   },
 ];
 
-export const addChirp = text => ({
-  id: fakeChirps.reduce((highestId, { id }) => {
-    return id > highestId ? id : highestId
-  }, 0) + 1,
-  text,
-  timeStamp: new Date().toString(),
-})
+export const seedChirps = () => fakeChirps;
+
+export const addChirp = (chirpsList, text) => {
+  const newChirp = {
+    id: chirpsList.reduce((highestId, { id }) => {
+      return id > highestId ? id : highestId
+    }, 0) + 1,
+    text,
+    timeStamp: new Date().toString(),
+  };
+  return [...chirpsList, newChirp]
+}

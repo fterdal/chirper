@@ -4,20 +4,26 @@ import { addChirp } from './utils';
 export default class ChirpForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      value: ''
+    }
   }
   render() {
     console.log(this);
-    return (<div>
-      <h4>New Chirp</h4>
-      <form>
-        <input
-          name="postText"
-          className="form-control"
-          type="text"
-        />
-        <input className="btn btn-submit" type="submit" value="Chirp" />
-      </form>
-    </div>)
+    return (
+      <div>
+        <h4>New Chirp</h4>
+        <form className="col s12">
+          <div className="row">
+            <input
+              name="chirpText"
+              className="materialize-textarea"
+              type="text"
+            />
+            <input className="btn btn-submit" type="submit" value="Chirp" />
+          </div>
+        </form>
+      </div>
+  )
   }
 }
