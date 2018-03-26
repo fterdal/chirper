@@ -1,7 +1,7 @@
 import React from 'react';
 import { fakeChirps } from './utils';
 
-export const AllChirps = () => {
+export const ChirpsList = () => {
   const chirpsListItems = fakeChirps.map(({id, text}) =>
     (
       <li key={id} className="card horizontal">

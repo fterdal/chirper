@@ -1,13 +1,13 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-import { AllChirps } from './AllChirps';
+import { ChirpsList } from './ChirpsList';
 
 const App = () => {
   return (
     <div className="container">
-      <h2>Chirper!</h2>
-      <AllChirps />
+      <h1>Chirper!</h1>
+      <ChirpsList />
     </div>
   )
 }
