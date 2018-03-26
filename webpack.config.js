@@ -20,7 +20,7 @@ module.exports = {
         include: /browser/,
         loader: 'babel-loader',
         query: {
-          presets: ['react', 'env', 'stage-3']
+          presets: ['react', 'env', 'stage-2']
         }
       }
     ]

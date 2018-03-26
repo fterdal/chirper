@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { addChirp } from './utils';
 
 export default class ChirpForm extends Component {
   constructor(props) {
@@ -8,8 +7,16 @@ export default class ChirpForm extends Component {
       value: ''
     }
   }
+  handleSubmit = (evt) => {
+    evt.preventDefault();
+  }
+  handleChange = (evt) => {
+    console.log(this.state)
+    this.setState({
+      value: evt.target.value
+    })
+  }
   render() {
-    console.log(this);
     return (
       <div>
         <h4>New Chirp</h4>
@@ -19,11 +26,13 @@ export default class ChirpForm extends Component {
               name="chirpText"
               className="materialize-textarea"
               type="text"
+              value={this.state.value}
+              onChange={this.handleChange}
             />
             <input className="btn btn-submit" type="submit" value="Chirp" />
           </div>
         </form>
       </div>
-  )
+    )
   }
 }
