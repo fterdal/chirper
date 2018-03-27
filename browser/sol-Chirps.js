@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import ChirpsList from './ChirpsList';
 import ChirpForm from './ChirpForm';
-import { seedChirps } from './utils';
+import { seedChirps, appendChirp } from './utils';
 
 export default class Chirps extends Component {
   constructor(props) {
@@ -14,10 +14,13 @@ export default class Chirps extends Component {
   componentWillMount() {
     this.setState({ chirps: seedChirps() })
   }
+  addChirp = (newChirpText)  => {
+    this.setState({ chirps: appendChirp(this.state.chirps, newChirpText)})
+  }
   render() {
     return (
       <div>
-        <ChirpForm />
+        <ChirpForm addChirp={this.addChirp} />
         <ChirpsList chirps={this.state.chirps} />
       </div>
     )
