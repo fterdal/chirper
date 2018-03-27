@@ -1,9 +1,14 @@
+// Credit to Twitter account @ProBirdsRights for the excellent tweets
+// The tweets marked with /* @ProBirdsRights */ are from that account
 const fakeChirps = [
   'i just saw a duck-billed goose-heron-swallow',
-  'is that daffy duck??!??!!!',
+  'did i just see that daffy duck??!??!!!',
   'cluck cluck',
-  'birds are so much cooler than goats, just sayin\'',
   'sign my petition to outlaw feather dusters',
+  'There were a cheeto. now there aren’t and I cover in orange dust. mystery abound', /* @ProBirdsRights */
+  'Beak Mirror epersode: there a mirror an ANOTHER BIRB ON OTHER SIDE COMIN RIGHT AT ME GET EM ATTANCK', /* @ProBirdsRights */
+  'A poem: i a robin not a tarkey so this Thanksgobin do no eat me', /* @ProBirdsRights */
+  "psst i was the bord who ate Hamsel and Grattel's breabcrumbs don't regert it.", /* @ProBirdsRights */
 ]
 
 export const appendChirp = (prevChirps, text) => {
