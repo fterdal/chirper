@@ -5,7 +5,6 @@ export default class ChirpForm extends Component {
     super(props);
     this.state = {
       value: '', // This is the value from the form field
-      // errors: new Set(), // A Set is like an array, but without any duplicates
       errors: [],
       dirty: false, // The dirty flag indicates whether the form has been
                     // touched by the user yet. We don't want to complain about
@@ -59,11 +58,10 @@ export default class ChirpForm extends Component {
     return (
       <div>
         <h4>New Chirp</h4>
-        <form className="" onSubmit={handleSubmit} autoComplete="off">
-          <div className="row">
-            <input
+        <form onSubmit={handleSubmit} autoComplete="off">
+          <div>
+            <textarea
               name="chirpText"
-              className="textarea"
               type="text"
               value={value}
               onChange={handleChange}
@@ -72,7 +70,8 @@ export default class ChirpForm extends Component {
               className="button"
               type="submit"
               disabled={errors.length}
-              value="Chirp" />
+              value="Chirp"
+            />
           </div>
         </form>
         {errorsList}
