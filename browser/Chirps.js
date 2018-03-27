@@ -1,20 +1,27 @@
-/* eslint react/prefer-stateless-function:0 */
 import React, { Component } from 'react';
 
 import ChirpsList from './ChirpsList';
 import ChirpForm from './ChirpForm';
+import { seedChirps, appendChirp } from './utils';
 
 export default class Chirps extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      chirps: [],
+    }
+  }
+  componentWillMount() {
+    this.setState({ chirps: seedChirps() })
+  }
+  addChirp = (newChirpText)  => {
+    this.setState({ chirps: appendChirp(this.state.chirps, newChirpText)})
   }
   render() {
     return (
       <div>
-        {console.log(this)}
-        <ChirpForm />
-        <ChirpsList />
+        <ChirpForm addChirp={this.addChirp} />
+        <ChirpsList chirps={this.state.chirps} />
       </div>
     )
   }

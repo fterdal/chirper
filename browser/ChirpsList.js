@@ -1,18 +1,16 @@
 import React from 'react';
-import { fakeChirps } from './utils';
 
-const ChirpsList = () => {
-  const chirpsListItems = fakeChirps.map(({id, text}) =>
+const ChirpsList = ({ chirps }) => {
+  const chirpsListItems = chirps.map(({id, text, timeStamp}) =>
     (
-      <li key={id} className="card horizontal">
-        <div className="card card-content">
-          {text}
-        </div>
+      <li key={id} className="singleChirp">
+        <blockquote>{text}</blockquote>
+        <span>{timeStamp}</span>
       </li>
     )
   )
   return (
-    <ul>
+    <ul className="chirpsFeed">
       {chirpsListItems}
     </ul>
   )
