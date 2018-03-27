@@ -6,7 +6,7 @@ import Chirps from './Chirps';
 const App = () => {
   return (
     <div className="container">
-      <h1>Chirper!</h1>
+      <h1>Chirper! The social media for birds!</h1>
       <Chirps />
     </div>
   )

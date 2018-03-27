@@ -31,22 +31,17 @@ export default class ChirpForm extends Component {
   validateForm = () => {
     const { value, dirty } = this.state;
     const newErrors = [];
-    let isValid = true;
     if (!value) {
-      isValid = false;
-      if (!dirty) return isValid;
+      if (!dirty) return;
       newErrors.push('Chirp must not be empty');
     }
     if (value.length > 140) {
       newErrors.push('Chirp must not be longer than 140');
-      isValid = false;
     }
     if (value.includes('bawk')) {
       newErrors.push('Chirp must not contain profanity');
-      isValid = false;
     }
     this.setState({ errors: newErrors })
-    return isValid;
   }
   render() {
     const { state: { value, errors }, handleChange, handleSubmit } = this;
