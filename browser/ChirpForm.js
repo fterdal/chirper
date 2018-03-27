@@ -10,7 +10,16 @@ export default class ChirpForm extends Component {
     return (
       <div>
         <h4>New Chirp</h4>
-        <p>Form goes here...</p>
+        <form>
+          <textarea
+            name="chirpText"
+            type="text"
+          />
+          <input
+            type="submit"
+            value="Chirp"
+          />
+        </form>
       </div>
     )
   }
