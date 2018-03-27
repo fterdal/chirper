@@ -18,7 +18,6 @@ export default class Chirps extends Component {
     this.setState({ chirps: appendChirp(this.state.chirps, newChirpText)})
   }
   render() {
-    console.log('this.state.chirps', this.state.chirps)
     return (
       <div>
         <ChirpForm addChirp={this.addChirp} />
