@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import ChirpsList from './ChirpsList';
 import ChirpForm from './ChirpForm';
-import { seedChirps } from './utils';
+import { seedChirps, createChirp } from './utils';
 
 export default class Chirps extends Component {
   constructor(props) {
@@ -11,15 +11,21 @@ export default class Chirps extends Component {
       chirps: seedChirps(),
     }
   }
-  addChirp = (newChirp) => {
+  addChirp = (newChirpText)  => {
+    const nextId = this.state.chirps.reduce((highestId, { id }) => {
+      return id > highestId ? id : highestId
+    }, 0) + 1;
     this.setState(prevState => {
-      return [...prevState, newChirp]
+      return {
+        ...this.state,
+        chirps: [...prevState.chirps, createChirp(nextId, newChirpText)]
+      }
     })
   }
   render() {
     return (
       <div>
-        <ChirpForm />
+        <ChirpForm addChirp={this.addChirp} />
         <ChirpsList chirps={this.state.chirps} />
       </div>
     )

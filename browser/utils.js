@@ -28,7 +28,13 @@ const fakeChirps = [
 
 export const seedChirps = () => fakeChirps;
 
-export const addChirp = (chirpsList, text) => {
+export const createChirp = (id, text) => ({
+  id,
+  text,
+  timeStamp: new Date().toString(),
+})
+
+export const createChirpOLD = (chirpsList, text) => {
   const newChirp = {
     id: chirpsList.reduce((highestId, { id }) => {
       return id > highestId ? id : highestId

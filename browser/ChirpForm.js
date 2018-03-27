@@ -9,6 +9,8 @@ export default class ChirpForm extends Component {
   }
   handleSubmit = (evt) => {
     evt.preventDefault();
+    this.props.addChirp(this.state.value);
+    this.setState({value: ''});
   }
   handleChange = (evt) => {
     console.log(this.state)
@@ -20,7 +22,7 @@ export default class ChirpForm extends Component {
     return (
       <div>
         <h4>New Chirp</h4>
-        <form className="col s12">
+        <form className="col s12" onSubmit={this.handleSubmit}>
           <div className="row">
             <input
               name="chirpText"
