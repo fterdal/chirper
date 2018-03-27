@@ -4,41 +4,72 @@ export default class ChirpForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: ''
+      value: '',
+      errors: [],
+      dirty: false,
     }
+  }
+  componentWillUpdate() {
+    this.validateForm();
   }
   handleSubmit = (evt) => {
     evt.preventDefault();
+    // if (!this.validateForm()) return;
+    if (this.state.errors.length) return;
     this.props.addChirp(this.state.value);
-    this.setState({value: ''});
+    this.setState({ value: '', dirty: false, errors: [] });
   }
   handleChange = (evt) => {
-    console.log(this.state)
     this.setState({
-      value: evt.target.value
+      value: evt.target.value,
+      dirty: true,
     })
   }
-  // Returns true if the chirp can be submitted. If not, it adds to a list of
+  // Returns true iff the chirp can be submitted. If not, it adds to a list of
   // errors to be fixed.
   validateForm = () => {
-    
+    const { value, errors, dirty } = this.state;
+    let isValid = true;
+    if (!value) {
+      isValid = false;
+      if (!dirty) return isValid;
+      errors.push('Chirp must not be empty');
+    }
+    if (value.length > 140) {
+      errors.push('Chirp must not be longer than 140');
+      isValid = false;
+    }
+    if (value.includes('bawk')) {
+      errors.push('Chirp must not contain profanity');
+      isValid = false;
+    }
+    return isValid;
   }
   render() {
+    console.log(this.state)
+    this.validateForm();
+    const { state: { value, errors }, handleChange, handleSubmit } = this;
+    const errorsList = errors.length ? (
+      <ul>
+        {errors.map(error => <li key={error[0] + error.length}>{error}</li>)}
+      </ul>
+    ) : null
     return (
       <div>
         <h4>New Chirp</h4>
-        <form className="col s12" onSubmit={this.handleSubmit}>
+        <form className="" onSubmit={handleSubmit}>
           <div className="row">
             <input
               name="chirpText"
-              className="materialize-textarea"
+              className="textarea"
               type="text"
-              value={this.state.value}
-              onChange={this.handleChange}
+              value={value}
+              onChange={handleChange}
             />
             <input className="btn btn-submit" type="submit" value="Chirp" />
           </div>
         </form>
+        {errorsList}
       </div>
     )
   }
