@@ -3,18 +3,18 @@ import React from 'react';
 const ChirpsList = ({ chirps }) => {
   const chirpsListItems = chirps.map(({id, text, timeStamp}) =>
     (
-      <li key={id} className="card horizontal">
-        <div className="card card-content">
+      <li key={id} className="singleChirp">
+        <blockquote className="">
           {text}
-        </div>
-        <span className="card card-content">
+        </blockquote>
+        <span className="">
           {timeStamp}
         </span>
       </li>
     )
-  ).reverse()
+  )
   return (
-    <ul>
+    <ul className="chirpsFeed">
       {chirpsListItems}
     </ul>
   )

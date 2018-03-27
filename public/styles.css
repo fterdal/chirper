@@ -1,3 +1,10 @@
-.logo {
+.chirpsFeed {
+  display: flex;
+  flex-direction: column-reverse;
+  list-style: none;
+}
 
+.singleChirp {
+  display: flex;
+  justify-content: space-between;
 }

@@ -18,6 +18,11 @@ export default class ChirpForm extends Component {
       value: evt.target.value
     })
   }
+  // Returns true if the chirp can be submitted. If not, it adds to a list of
+  // errors to be fixed.
+  validateForm = () => {
+    
+  }
   render() {
     return (
       <div>
