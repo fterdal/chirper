@@ -4,60 +4,61 @@ export default class ChirpForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
-      errors: [],
-      dirty: false,
+      value: '', // This is the value from the form field
+      errors: new Set(), // A Set is like an array, but without any duplicates
+      dirty: false, // The dirty flag indicates whether the form has been
+                    // touched by the user yet. We don't want to complain about
+                    // an empty field if they haven't started typing yet.
     }
   }
-  componentWillUpdate() {
-    this.validateForm();
-  }
   handleSubmit = (evt) => {
+    // preventDefault prevents the browser from refreshing on form submit
     evt.preventDefault();
-    // if (!this.validateForm()) return;
-    if (this.state.errors.length) return;
-    this.props.addChirp(this.state.value);
-    this.setState({ value: '', dirty: false, errors: [] });
+    const { errors, value, dirty } = this.state;
+    if (errors.size || !dirty) return; // If the form has any errors, or hasn't
+                                       // been touched yet, don't add the chirp
+    this.props.addChirp(value);
+    this.setState({ value: '', dirty: false, errors: new Set() });
   }
   handleChange = (evt) => {
+    // Passing a callback as the second argument to setState allows us to
+    // run that function once the state has finished being updated
     this.setState({
       value: evt.target.value,
       dirty: true,
-    })
+    }, this.validateForm)
   }
-  // Returns true iff the chirp can be submitted. If not, it adds to a list of
-  // errors to be fixed.
   validateForm = () => {
-    const { value, errors, dirty } = this.state;
+    const { value, dirty } = this.state;
+    const newErrors = new Set();
     let isValid = true;
     if (!value) {
       isValid = false;
       if (!dirty) return isValid;
-      errors.push('Chirp must not be empty');
+      newErrors.add('Chirp must not be empty');
     }
     if (value.length > 140) {
-      errors.push('Chirp must not be longer than 140');
+      newErrors.add('Chirp must not be longer than 140');
       isValid = false;
     }
     if (value.includes('bawk')) {
-      errors.push('Chirp must not contain profanity');
+      newErrors.add('Chirp must not contain profanity');
       isValid = false;
     }
+    this.setState({ errors: newErrors })
     return isValid;
   }
   render() {
-    console.log(this.state)
-    this.validateForm();
     const { state: { value, errors }, handleChange, handleSubmit } = this;
-    const errorsList = errors.length ? (
+    const errorsList = errors.size ? (
       <ul>
-        {errors.map(error => <li key={error[0] + error.length}>{error}</li>)}
+        {Array.from(errors).map(error => <li className="errorMsg" key={error.length}>{error}</li>)}
       </ul>
-    ) : null
+    ) : null;
     return (
       <div>
         <h4>New Chirp</h4>
-        <form className="" onSubmit={handleSubmit}>
+        <form className="" onSubmit={handleSubmit} autoComplete="off">
           <div className="row">
             <input
               name="chirpText"
@@ -66,7 +67,11 @@ export default class ChirpForm extends Component {
               value={value}
               onChange={handleChange}
             />
-            <input className="btn btn-submit" type="submit" value="Chirp" />
+            <input
+              className="button"
+              type="submit"
+              disabled={errors.size}
+              value="Chirp" />
           </div>
         </form>
         {errorsList}

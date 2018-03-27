@@ -31,7 +31,8 @@ export const seedChirps = () => fakeChirps;
 export const createChirp = (id, text) => ({
   id,
   text,
-  timeStamp: new Date().toString(),
+  // timeStamp: new Date().toString(),
+  timeStamp: new Date().toLocaleDateString('America/Chicago', {week: 'short'}),
 })
 
 export const createChirpOLD = (chirpsList, text) => {

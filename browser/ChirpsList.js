@@ -4,12 +4,8 @@ const ChirpsList = ({ chirps }) => {
   const chirpsListItems = chirps.map(({id, text, timeStamp}) =>
     (
       <li key={id} className="singleChirp">
-        <blockquote className="">
-          {text}
-        </blockquote>
-        <span className="">
-          {timeStamp}
-        </span>
+        <blockquote>{text}</blockquote>
+        <span>{timeStamp}</span>
       </li>
     )
   )
